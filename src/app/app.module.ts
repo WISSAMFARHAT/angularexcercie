@@ -15,8 +15,15 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
+
+export function tokengetter()
+{
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -37,8 +44,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:tokengetter
+      }
+    })
   ],
-  providers: [AuthGuard],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 
 })

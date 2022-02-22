@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Service } from 'src/app/services/service';
+import { AuthService } from 'src/app/services/auth.service'
+import jwt from '@auth0/angular-jwt';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,7 @@ export class LoginComponent implements OnInit {
       email:new FormControl('',[Validators.required]),
       pwd:new FormControl('',[Validators.required])
   });
-  constructor(private service:Service) { }
+  constructor(private service:Service,private authService:AuthService) { }
 
   ngOnInit(): void {
 
@@ -30,21 +33,21 @@ export class LoginComponent implements OnInit {
   submit() {
     if(this.loginform.valid)
     {
-      var user=this.service.loginuser(this.loginform.get('email')?.value,this.loginform.get('pwd')?.value);
-      if(user.length>0)
-      {
-        console.log('done');
-        localStorage.setItem('user', JSON.stringify(user));
+        const users=this.loginform.get('email')?.value;
+        const pwds=this.loginform.get('pwd')?.value;
+
+          var user=this.service.loginuser(users,pwds);
+          if(user.length>0)
+          {
+            this.authService.loginuser(users,pwds);
+            
+          }
         
       }else
       {
-
+        console.log("invalid");
       }
-    }else
-    {
-        
-
-    }
+    
     
   }
 

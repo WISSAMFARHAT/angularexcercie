@@ -6,6 +6,10 @@ const fs = require('fs');
 const dataPathUser = './model/user.json' // path to our JSON file
 const dataPathProduct = './model/product.json' // path to our JSON file
 
+
+
+
+
 // util functions User
 const saveUserData = (data) => {
     const stringifyData = JSON.stringify(data)

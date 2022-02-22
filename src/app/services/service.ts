@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
+import { Router } from 'express';
 import dbproduct from '../../../model/product.json';
 import dbuser from '../../../model/user.json';
 @Injectable({
@@ -8,6 +10,7 @@ export class Service {
 
  
   constructor() { }
+
 
     getallproduct()
     { 
@@ -25,7 +28,7 @@ export class Service {
 
     loginuser(email:string,pwd:string)
     {
-      return dbuser.user.filter(x=>x.email==email && x.pwd==pwd);
+        return(dbuser.user.filter(x=>x.email==email && x.pwd==pwd)); 
     }
 /*
     adduser(user:User)
