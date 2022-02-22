@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Service } from 'src/app/services/service';
 
 @Component({
   selector: 'app-login',
@@ -9,18 +10,42 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class LoginComponent implements OnInit {
   
   loginform=new FormGroup({
-      email:new FormControl(),
-      pwd:new FormControl()
+      email:new FormControl('',[Validators.required]),
+      pwd:new FormControl('',[Validators.required])
   });
-  constructor() { }
+  constructor(private service:Service) { }
 
   ngOnInit(): void {
 
   }
 
+  get email():any
+  {
+    return this.loginform.get('email');
+  }
+  get pwd():any
+  {
+    return this.loginform.get('pwd');
+  }
   submit() {
-    console.log("Form Submitted")
-    console.log(this.loginform.value)
+    if(this.loginform.valid)
+    {
+      var user=this.service.loginuser(this.loginform.get('email')?.value,this.loginform.get('pwd')?.value);
+      if(user.length>0)
+      {
+        console.log('done');
+        localStorage.setItem('user', JSON.stringify(user));
+        
+      }else
+      {
+
+      }
+    }else
+    {
+        
+
+    }
+    
   }
 
 }

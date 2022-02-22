@@ -12,6 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './services/auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -24,14 +28,17 @@ import { ProfileComponent } from './components/profile/profile.component';
     CartComponent,
     LoginComponent,
     ProfileComponent,
+    AdminComponent,
+    RegisterComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 
 })

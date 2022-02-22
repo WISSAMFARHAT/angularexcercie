@@ -1,11 +1,12 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-4">
-            <img alt="img" src="https://storage.googleapis.com/original-marines-outlet/889fb4b3-5a03-40d3-92b3-c3ecb34f563a-1" class="img" />
+            <img alt="img" src="{{item[0].image}}" class="img" />
         </div>
         <div class="col-lg-8">
-            <h5>Product 1</h5>
-            <h3>Description 1</h3>
+            <h5>{{item[0].title}}</h5>
+            <h3>{{item[0].description}}</h3>
+            <h2>{{item[0].price}}</h2>
             <form [formGroup]="productform"  (ngSubmit)="submit()">
                 <label>Size : </label>
                 <select class="form-control w-50 mb-3" formControlName="size">
@@ -28,6 +29,7 @@
                 <br />
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            
         </div>
     </div>
 </div>

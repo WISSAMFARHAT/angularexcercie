@@ -1,0 +1,16 @@
+{
+    "user":[
+      {
+         "id":1,
+         "email":"zahraa.chomane",
+         "pwd":"123",
+         "first_name":"zahraa",
+         "last_name":"choumane",
+         "company":"Beirut",
+         "mobile":"+961787878",
+         "address":"beirut,city",
+         "image":""
+      }
+    ] 
+   
+   }

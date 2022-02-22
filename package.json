@@ -1,9 +1,11 @@
 {
   "name": "first-app",
   "version": "0.0.0",
+ 
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "main": "app.js",
+    "start": "ng serve nodemon app.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -18,6 +20,11 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "@auth0/angular-jwt": "^5.0.2",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.15",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -35,5 +42,20 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.5.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.",
+  
+ 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WISSAMFARHAT/angularexcercie.git"
+  },
+  
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WISSAMFARHAT/angularexcercie/issues"
+  },
+  "homepage": "https://github.com/WISSAMFARHAT/angularexcercie#readme"
 }
