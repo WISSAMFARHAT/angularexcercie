@@ -21,11 +21,11 @@ let secret = 'some_secret';
 
 
 
-app.get('/token/sign', (req, res) => {
+app.post('/token/sign', (req, res) => {
     
     var userData = {
-        "email": "zahraa.choumane",
-        "pwd": "123"
+        "email": req.body["email"],
+        "pwd": req.body["pwd"],
     }
     let token = jwt.sign(userData, secret, { expiresIn: '2h'})
     res.status(200).json({"token": token});
@@ -38,7 +38,6 @@ app.get('/path1', (req, res) => {
             "msg": "Secrect Access Granted"
         });
 });
-
 
 
 //start server

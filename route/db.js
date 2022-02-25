@@ -79,6 +79,21 @@ Routes.delete('/user/delete/:id', (req, res) => {
 })
 
 
+function readUsers() {
+  const dbRaw = fs.readFileSync(dataPathUser);  
+  const users = JSON.parse(dbRaw)
+  return users;
+}
+
+Routes.post('/login',(req,res)=>{
+    const user = readUsers();
+    
+    const users = user.filter(x=>x.email==req.body.email && x.pwd==req.body.pwd);
+    res.send(users);
+    
+})
+
+
 // util functions Product
 const saveProductData = (data) => {
   const stringifyData = JSON.stringify(data)
@@ -98,6 +113,21 @@ Routes.get('/product', (req, res) => {
     res.send(JSON.parse(data));
   });
 });
+
+function readProducts() {
+  const dbRaw = fs.readFileSync(dataPathProduct);  
+  const products = JSON.parse(dbRaw)
+  return products;
+}
+
+Routes.get('/product/:id',(req,res)=>{
+    const product = readProducts();
+
+  const Products = product.filter(x=>x.id==req.params['id']);
+
+
+res.send(Products)
+})
 
 Routes.post('/product/addproduct', (req, res) => {
  

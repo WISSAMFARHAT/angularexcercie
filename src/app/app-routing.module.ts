@@ -13,10 +13,10 @@ import { RegisterComponent } from './components/auth/register/register.component
 const routes: Routes = [
   {path: '' ,component:ProductsComponent},
   {path: 'products' ,component:ProductsComponent},
-  {path: 'detail/:id' ,component:ProductdetailsComponent,},
-  {path: 'cart' ,component:CartComponent,},
+  {path: 'detail/:id' ,component:ProductdetailsComponent,canActivate: [AuthGuard]},
+  {path: 'cart' ,component:CartComponent,canActivate: [AuthGuard]},
   {path: 'login' ,component:LoginComponent,},
-  {path: 'profile' ,component:ProfileComponent,},
+  {path: 'profile' ,component:ProfileComponent,canActivate: [AuthGuard]},
   {path: 'register' ,component:RegisterComponent,},
   { path: '**', redirectTo: '' }
 ];

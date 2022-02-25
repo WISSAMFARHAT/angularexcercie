@@ -4,6 +4,7 @@ import { Service } from 'src/app/services/service';
 import { AuthService } from 'src/app/services/auth.service'
 import jwt from '@auth0/angular-jwt';
 import { Router } from 'express';
+import User from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from 'express';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+  userlogin:User[] | any;
   loginform=new FormGroup({
       email:new FormControl('',[Validators.required]),
       pwd:new FormControl('',[Validators.required])
@@ -35,13 +36,18 @@ export class LoginComponent implements OnInit {
     {
         const users=this.loginform.get('email')?.value;
         const pwds=this.loginform.get('pwd')?.value;
+        var loginuser;
+        this.service.loginuser(users,pwds).subscribe(
+          (res : any)=>{
+            console.log("sdsd : ",res[0])
+            if(res[0]!=null)
+            {
+              this.authService.loginuser(users,pwds);
 
-          var user=this.service.loginuser(users,pwds);
-          if(user.length>0)
-          {
-            this.authService.loginuser(users,pwds);
-            
+            }
           }
+        );
+        
         
       }else
       {
