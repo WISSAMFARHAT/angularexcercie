@@ -11,10 +11,10 @@ export class AuthGuard implements CanActivate {
   
   constructor(public auth: AuthService, public router: Router) {}
  
-
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+     
       if (!this.auth.isAuthenticated()) {
         this.router.navigate(['/login']);
         return false;
@@ -25,8 +25,9 @@ export class AuthGuard implements CanActivate {
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.auth.isAuthenticated()) {
       const userRole = this.auth.getRole();
-      if (userRole=='admin') {
-        this.router.navigate(['/admin']);
+      if (route.data['role'] && route.data['role']!=userRole) {
+        console.log("done")
+        this.router.navigate(['/']);
         return false;
       }
       return true;

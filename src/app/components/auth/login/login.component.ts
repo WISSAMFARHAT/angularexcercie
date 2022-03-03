@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private service:Service,private authService:AuthService) { }
 
   ngOnInit(): void {
-
+      
   }
 
   get email():any
@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit {
           (res : any)=>{
             if(res[0]!="null")
             {
-
-              this.authService.loginuser(users,pwds,res[0].role);
+              this.authService.loginuser(users,pwds,res.role);
 
             }
           }
