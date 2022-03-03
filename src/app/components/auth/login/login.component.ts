@@ -39,10 +39,10 @@ export class LoginComponent implements OnInit {
         var loginuser;
         this.service.loginuser(users,pwds).subscribe(
           (res : any)=>{
-            console.log("sdsd : ",res[0])
-            if(res[0]!=null)
+            if(res[0]!="null")
             {
-              this.authService.loginuser(users,pwds);
+
+              this.authService.loginuser(users,pwds,res[0].role);
 
             }
           }

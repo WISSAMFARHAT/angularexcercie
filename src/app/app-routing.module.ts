@@ -8,6 +8,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,9 @@ const routes: Routes = [
   {path: 'login' ,component:LoginComponent,},
   {path: 'profile' ,component:ProfileComponent,canActivate: [AuthGuard]},
   {path: 'register' ,component:RegisterComponent,},
+  {path:'admin',component:AdminComponent,canActivate:[AuthGuard],data: {
+    role: 'admin'
+  }},
   { path: '**', redirectTo: '' }
 ];
 

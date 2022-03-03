@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
+   
   ngOnInit(): void {
     
     
@@ -21,7 +22,9 @@ export class ProductsComponent implements OnInit {
       {
         this.items=pd;
       }
+     
       )
+     
   }
 
 }

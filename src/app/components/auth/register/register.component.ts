@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import User from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { Service } from 'src/app/services/service';
 
 @Component({
@@ -20,10 +21,9 @@ export class RegisterComponent implements OnInit {
     mobile:new FormControl('',[Validators.required]),
     address:new FormControl('',[Validators.required]),
   });
-  constructor(private service:Service) { }
+  constructor(private service:Service,private authService:AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
    generateUUID() { // Public Domain/MIT
     var d = new Date().getTime();//Timestamp
@@ -41,23 +41,26 @@ export class RegisterComponent implements OnInit {
     });
 }
   submit() {
-   /* if(this.loginform.valid)
+    if(this.loginform.valid)
     {
-        this.service.adduser(new User(
-          this.generateUUID(),
-          ""+this.loginform.get('email'),
-          ""+this.loginform.get('pwd'),
-          ""+this.loginform.get('first_name'),
-          ""+this.loginform.get('last_name'),
-          ""+this.loginform.get('copany'),
-          ""+this.loginform.get('mobile'),
-          ""+this.loginform.get('address'),""));
-          this.loginform.reset(this.loginform.value);
+      const newuser=new User(
+        this.generateUUID(),this.loginform.get('email')?.value,
+        this.loginform.get('pwd')?.value,this.loginform.get('first_name')?.value,
+        this.loginform.get('last_name')?.value,this.loginform.get('copany')?.value,
+        this.loginform.get('mobile')?.value,this.loginform.get('address')?.value,""
+      );
+      
+        this.service.adduser(newuser).subscribe(
+          (res:any)=>{
+            this.authService.loginuser(newuser.email,newuser.pwd,"user");
+          }
+        );   
+         
     }else
     {
       console.log("invalid");   
 
-    }*/
+    }
     
   }
 }

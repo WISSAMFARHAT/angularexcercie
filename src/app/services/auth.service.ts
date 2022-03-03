@@ -31,7 +31,7 @@ export class AuthService {
   }
 
 
-  loginuser(email:string,pwd:string)
+  loginuser(email:string,pwd:string,role:string)
     {
 
       const headers=new HttpHeaders().set('Content-Type','application/json');
@@ -43,17 +43,27 @@ export class AuthService {
       this.httpclient.post('http://localhost:3000/token/sign',user,{headers}).subscribe((res:any)=>{
          
         localStorage.setItem("access_token",res["token"]);
+        localStorage.setItem("role",role);
         this.setUserStatus(res["token"])
         this.router.navigate(["/"])
       });
 
 
+     
+
     }
 
+    getRole() {
+        
+     return  localStorage.getItem('role');
+    }
 
     logout(){
       localStorage.removeItem("access_token");
+      localStorage.removeItem("role");
       this.setUserStatus(null);
       this.router.navigate(["/login"])
     }
+
+   
 }

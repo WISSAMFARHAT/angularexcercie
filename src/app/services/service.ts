@@ -44,16 +44,13 @@ export class Service {
       return  this.httpclient.post('http://localhost:3000/login',user,{headers});
 
 
-//        return(dbuser.user.filter(x=>x.email==email && x.pwd==pwd)); 
     }
-/*
+
     adduser(user:User)
     {
-      
-      
-      db.user.push({id:2,email:user.email,pwd:user.pwd,first_name:user.first_name,last_name:user.last_name,company:user.company,mobile:user.mobile,address:user.address,image:user.image});
-       
-      
+      const headers=new HttpHeaders().set('Content-Type','application/json');
+      return  this.httpclient.post('http://localhost:3000/user/adduser',JSON.stringify(user),{headers});
+         
     }
-*/
+
 }
