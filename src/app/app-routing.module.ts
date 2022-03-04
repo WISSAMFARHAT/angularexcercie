@@ -9,6 +9,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AddComponent } from './components/admin/add/add.component';
+import { EditComponent } from './components/admin/edit/edit.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,13 @@ const routes: Routes = [
   {path:'admin',component:AdminComponent,canActivate:[AuthGuard],data: {
     role: 'admin'
   }},
+  {path:'admin/add',component:AddComponent,canActivate:[AuthGuard],data: {
+    role: 'admin'
+  }},
+  {path:'admin/edit/:id',component:EditComponent,canActivate:[AuthGuard],data: {
+    role: 'admin'
+  }},
+  
   { path: '**', redirectTo: '' }
 ];
 

@@ -18,6 +18,9 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { ListComponent } from './components/admin/list/list.component';
+import { AddComponent } from './components/admin/add/add.component';
+import { EditComponent } from './components/admin/edit/edit.component';
 
 
 export function tokengetter()
@@ -37,6 +40,9 @@ export function tokengetter()
     ProfileComponent,
     AdminComponent,
     RegisterComponent,
+    ListComponent,
+    AddComponent,
+    EditComponent,
     
   ],
   imports: [

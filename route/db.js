@@ -1,6 +1,7 @@
 const express = require("express")
 const Routes = express.Router();
 const fs = require('fs');
+const { filter } = require("rxjs");
 
 
 const dataPathUser = './model/user.json' // path to our JSON file
@@ -101,6 +102,7 @@ Routes.post('/login',(req,res)=>{
 // util functions Product
 const saveProductData = (data) => {
   const stringifyData = JSON.stringify(data)
+  
   fs.writeFileSync(dataPathProduct, stringifyData)
 }
 const getProductData = () => {
@@ -136,13 +138,10 @@ res.send(Products)
 Routes.post('/product/addproduct', (req, res) => {
  
   var existProduct = getProductData()
-  const newProducttId = Math.floor(100000 + Math.random() * 900000)
- 
-  existPorduct[newProducttId] = req.body
-   
-  console.log(existProduct);
 
-  saveUserData(existPorduct);
+  existProduct.push(req.body)
+   
+  saveProductData(existProduct);
   res.send({success: true, msg: 'account data added successfully'})
 })
 
@@ -155,28 +154,20 @@ Routes.get('/product/list', (req, res) => {
 
 
 // Update - using Put method
-Routes.put('/product/:id', (req, res) => {
-  var existProducts = getProductData()
-  fs.readFile(dataPathProduct, 'utf8', (err, data) => {
-   const ProductId = req.params['id'];
-   existUsers[ProductId] = req.body;
+Routes.post('/product/editroduct', (req, res) => {
+  var existProduct = getProductData().filter(x=>x.id!=req.body.id);
+  existProduct.push(req.body);
+  saveProductData(existProduct);
+  res.send({success: true, msg: 'account data added successfully'})
 
-   saveProductData(existProducts);
-   res.send(`accounts with id ${ProductId} has been updated`)
- }, true);
+  
 });
 
 //delete - using delete method
-Routes.delete('/product/delete/:id', (req, res) => {
-  fs.readFile(dataPathProduct, 'utf8', (err, data) => {
-   var existProduct = getProductData()
-
-   const ProductId = req.params['id'];
-
-   delete existProduct[ProductId];  
+Routes.get('/product/delete/:id', (req, res) => {
+   var existProduct = getProductData().filter(x=>x.id!=req.params['id'])
    saveProductData(existProduct);
-   res.send(`accounts with id ${ProductId} has been deleted`)
- }, true);
+  res.send(`accounts with id  has been deleted`);
 })
 
 

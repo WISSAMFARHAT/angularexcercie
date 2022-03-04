@@ -1,1 +1,8 @@
-<p>admin works!</p>
+<div class="container mt-5">
+    <div class="row mb-5" >
+        <div class="col-4" >
+                <a href="/admin/add" class="btn btn-success w-75">Add</a>
+        </div>
+    </div>
+        <app-list *ngFor="let item of items" (deleteevents)="deleteproduct($event)" [product]="item"   ></app-list>  
+</div>

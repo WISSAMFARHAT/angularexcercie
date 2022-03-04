@@ -6,7 +6,7 @@
         <ul>
             <li><a href="/products">Product</a></li>
             <li><a href="/cart">cart</a></li>
-            <li *ngIf="service.isAuthenticated()"><a href="/profile">User</a></li>
+            <li *ngIf="service.isAuthenticated()"><a href="/profile">{{user}}</a></li>
             
             <li *ngIf="service.isAuthenticated()"><a style="cursor: pointer;" (click)= "onLogout()" >Logout</a></li>
         </ul>

@@ -9,8 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   constructor(public service:AuthService) { }
-
+  user:string ="user";
   ngOnInit(): void {
+    this.user=""+localStorage.getItem('users')  ;
   }
 
 

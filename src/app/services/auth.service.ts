@@ -43,6 +43,7 @@ export class AuthService {
       this.httpclient.post('http://localhost:3000/token/sign',user,{headers}).subscribe((res:any)=>{
          
         localStorage.setItem("access_token",res["token"]);
+        localStorage.setItem("users",email);
         localStorage.setItem("role",role);
         this.setUserStatus(res["token"])
         this.router.navigate(["/"])
@@ -61,6 +62,7 @@ export class AuthService {
     logout(){
       localStorage.removeItem("access_token");
       localStorage.removeItem("role");
+      localStorage.removeItem("user");
       this.setUserStatus(null);
       this.router.navigate(["/login"])
     }
