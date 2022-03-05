@@ -12,7 +12,7 @@ import { Service } from 'src/app/services/service';
 })
 export class EditComponent implements OnInit {
   id:number |any;
-  item:Product[] | any;
+  item:Product | any;
   
   constructor(private service:Service,private _Activatedroute:ActivatedRoute) { }
   editform=new FormGroup({
@@ -27,11 +27,11 @@ export class EditComponent implements OnInit {
     this.id=this._Activatedroute.snapshot.paramMap.get("id");
     this.service.getproduct(this.id).subscribe((pd: any)=>
     {
-      this.item=pd;
-      this.editform.get("qt")?.setValue(this.item[0].qt);
-      this.editform.get("description")?.setValue(this.item[0].description);
-      this.editform.get("name")?.setValue(this.item[0].title);
-      this.editform.get("price")?.setValue(this.item[0].price);
+      this.item=pd[0];
+      this.editform.get("qt")?.setValue(this.item.qt);
+      this.editform.get("description")?.setValue(this.item.description);
+      this.editform.get("name")?.setValue(this.item.title);
+      this.editform.get("price")?.setValue(this.item.price);
     });
     
   }
